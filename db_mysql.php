@@ -1,22 +1,28 @@
 <?php
 
-$host = "127.0.0.1";
-$port = "3306";
-$db   = "guvi_internship";
-$user = "root";
-$pass = "jeno3005";
+$host = getenv("MYSQL_HOST");
+$port = getenv("MYSQL_PORT");
+$database = getenv("MYSQL_DATABASE");
+$user = getenv("MYSQL_USER");
+$password = getenv("MYSQL_PASSWORD");
 
 try {
-    $pdo = new PDO(
-        "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4",
-        $user,
-        $pass,
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-    );
-} catch (PDOException $e) {
-    http_response_code(500);
-    echo json_encode(["success" => false, "message" => "DB connection failed: " . $e->getMessage()]);
-    exit;
-}
 
+    $conn = new PDO(
+        "mysql:host=$host;port=$port;dbname=$database",
+        $user,
+        $password,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ]
+    );
+
+} catch (PDOException $e) {
+
+    die(json_encode([
+        "success" => false,
+        "message" => "DB connection failed: " . $e->getMessage()
+    ]));
+
+}
 ?>
