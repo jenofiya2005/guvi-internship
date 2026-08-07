@@ -2,18 +2,19 @@
 
 $host = getenv("MYSQL_HOST");
 $port = getenv("MYSQL_PORT");
-$database = getenv("MYSQL_DATABASE");
+$db   = getenv("MYSQL_DATABASE");
 $user = getenv("MYSQL_USER");
-$password = getenv("MYSQL_PASSWORD");
+$pass = getenv("MYSQL_PASSWORD");
 
 try {
 
     $conn = new PDO(
-        "mysql:host=$host;port=$port;dbname=$database",
+        "mysql:host=" . $host . ";port=" . $port . ";dbname=" . $db . ";charset=utf8mb4",
         $user,
-        $password,
+        $pass,
         [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]
     );
 
