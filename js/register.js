@@ -3,7 +3,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         $.ajax({
-            url: "php/register.php",
+            url: "register.php",
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
