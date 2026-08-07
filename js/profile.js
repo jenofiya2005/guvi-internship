@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     // Load existing profile data if available
     $.ajax({
-        url: "php/profile.php",
+        url: "profile.php",
         method: "POST",
         data: {
             action: "get",
