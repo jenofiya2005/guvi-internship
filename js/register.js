@@ -1,22 +1,18 @@
 $(document).ready(function () {
-    $("#loginForm").on("submit", function (e) {
+    $("#registerForm").on("submit", function (e) {
         e.preventDefault();
 
         $.ajax({
-            url: "php/login.php",
+            url: "php/register.php",
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
             success: function (res) {
                 if (res.success) {
-                    // Save session info in localStorage (spec requirement, no PHP session)
-                    localStorage.setItem("token", res.token);
-                    localStorage.setItem("user", JSON.stringify(res.user));
-
                     alert(res.message);
-                    window.location.href = "profile.html";
+                    window.location.href = "login.html";
                 } else {
-                    alert("Login failed: " + res.message);
+                    alert("Registration failed: " + res.message);
                 }
             },
             error: function (xhr) {
