@@ -1,29 +1,25 @@
 <?php
 
-$host = getenv("MYSQL_HOST");
-$port = getenv("MYSQL_PORT");
-$db   = getenv("MYSQL_DATABASE");
-$user = getenv("MYSQL_USER");
-$pass = getenv("MYSQL_PASSWORD");
+$host = "guvi-mysql-guvi-internship.e.aivencloud.com";
+$port = "17046";
+$db   = "defaultdb";
+$user = "avnadmin";
+$pass = "AVNS_x3Ryy7wvkdemeaTp9nF";
 
 try {
-
-    $conn = new PDO(
-        "mysql:host=" . $host . ";port=" . $port . ";dbname=" . $db . ";charset=utf8mb4",
+    $pdo = new PDO(
+        "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4",
         $user,
         $pass,
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
         ]
     );
-
 } catch (PDOException $e) {
-
-    die(json_encode([
-        "success" => false,
-        "message" => "DB connection failed: " . $e->getMessage()
-    ]));
-
+    http_response_code(500);
+    echo json_encode(["success" => false, "message" => "DB connection failed: " . $e->getMessage()]);
+    exit;
 }
+
 ?>
