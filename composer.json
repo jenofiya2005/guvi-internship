@@ -1,8 +1,8 @@
 {
-    "name": "jenofiya2005/guvi_internship",
+    "name": "jenofiya2005/guvi-internship",
     "require": {
         "php": "^8.1",
-        "mongodb/mongodb": "^1.16",
+        "mongodb/mongodb": "^2.0",
         "predis/predis": "^2.0"
     }
 }
